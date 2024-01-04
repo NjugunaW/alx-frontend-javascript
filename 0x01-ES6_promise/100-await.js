@@ -1,12 +1,15 @@
-import { uploadPhoto, createUser } from "utils.js";
+/* eslint-disable*/
+import { uploadPhoto, createUser } from "./utils.js";
 
-export default async function asyncUploadUser() {
-  try {
-    return {
-      photo: await uploadPhoto(),
-      user: await createUser(),
-    };
-  } catch (_) {
-    return { photo: null, user: null };
-  }
+export default function handleProfileSignup() {
+  return Promise.all([uploadPhoto(), createUser()])
+    .then((result) => {
+      console.log(
+        `${result[0].body} ${result[1].firstName} ${result[1].lastName}`
+      );
+    })
+
+    .catch((error) => {
+      console.log("Signup system offline");
+    });
 }
