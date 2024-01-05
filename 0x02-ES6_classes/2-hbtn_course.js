@@ -1,49 +1,48 @@
-class default class HolbertonCourse {
-  constructor(name, length, students) {
-    // Verify the types of attributes
-    if (typeof name !== 'string' || typeof length !== 'number' || !Array.isArray(students)) {
-      throw new Error('Invalid attribute types');
-    }
+/* eslint-disable */
 
-    // Store attributes in underscore attribute versions
-    this._name = name;
-    this._length = length;
-    this._students = students;
+export default class HolbertonCourse {
+  constructor(name, length, students) {
+    this.validateAndSet('name', name, 'string', 'Name must be a string');
+    this.validateAndSet('length', length, 'number', 'Length must be a number');
+    this.validateAndSet('students', students, 'array', 'Students must be an array of strings');
   }
 
-  // A getter and setter for the 'name' attribute
+  validateAndSet(property, value, expectedType, errorMessage) {
+    if (typeof value !== expectedType) {
+      throw new TypeError(errorMessage);
+    } else {
+      this[`_${property}`] = value;
+    }
+  }
+
+  // getter
   get name() {
     return this._name;
   }
 
-  set name(newName) {
-    if (typeof newName !== 'string') {
-      throw new Error('Name must be a string');
-    }
-    this._name = newName;
-  }
-
-  // A getter and setter for the 'length' attribute
+  // gets the length
   get length() {
     return this._length;
   }
 
-  set length(newLength) {
-    if (typeof newLength !== 'number') {
-      throw new Error('Length must be a number');
-    }
-    this._length = newLength;
-  }
-
-  // A getter and setter for the 'students' attribute
+  // gets the amount of students
   get students() {
     return this._students;
   }
 
-  set students(newStudents) {
-    if (!Array.isArray(newStudents)) {
-      throw new Error('Students must be an array of strings');
-    }
-    this._students = newStudents;
+  // setter 
+  set name(Name) {
+    this.validateAndSet('name', Name, 'string', 'Name must be a string');
+  }
+
+  set length(Length) {
+    this.validateAndSet('length', Length, 'number', 'Length must be a number');
+  }
+
+  // set the amount of students
+  set students(Students) {
+    this.validateAndSet('students', Students, 'array', 'Students must be an array of strings');
   }
 }
+
+/* eslint-enable */
