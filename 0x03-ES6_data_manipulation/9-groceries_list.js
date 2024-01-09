@@ -6,6 +6,4 @@ export default function groceriesList() {
         ['Rice', 1],
         ['Banana', 5]
     ]);
-
-    return groceryMap;
 }
