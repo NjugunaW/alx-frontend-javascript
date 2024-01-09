@@ -1,3 +1,6 @@
 export default function hasValuesFromArray(set, arr) {
-    return arr.every(set.has.bind(set));
+  for (const el of arr) {
+    if (!set.has(el)) return false;
+  }
+  return true;
 }
